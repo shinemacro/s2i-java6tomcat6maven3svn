@@ -1,5 +1,6 @@
-# s2i-java6tomcat6maven3svn
-Openshift s2i application template for JavaEE WAR deployment with Tomcat 6..( Java6 Tomcat6 Maven3 Svn S2I image )
+s2i-java6tomcat6maven3svn: OpenShift S2I Builder for Java6 Docker images
+====
+Openshift s2i application template for JavaEE WAR deployment with Tomcat 6.
 
 Supported tags and respective `Dockerfile` links
 ---------
@@ -37,7 +38,7 @@ To build a Java image:
     $ make
     ```
 
-    This image is also available on DockerHub. To download it run:
+  This image is also available on DockerHub. To download it run:
 
     ```
     $ docker pull zhaoayohong/s2i-java6tomcat6maven3svn:latest
@@ -45,15 +46,26 @@ To build a Java image:
 
 Test in Openshift
 ----
-  First load all the needed resources in a project.
+  1.First load ImageStream:
+
     ```
-    $ oc import image zhaoyaohong/s2i-java6tomcat6maven3svn --all
-    ```
-  Once the builder s2i-java6tomcat6maven3svn has been registered, you can create an template with:
-    ```
-    $ oc import image zhaoyaohong/s2i-java6tomcat6maven3svn --all
+    $ oc create -n openshift -f https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/s2i-java6tomcat6maven3svn-is.json
     ```
   
-  Instant app already provided as template
-  Using the s2i-java6tomcat6maven3svn builder image using a regular SVN repository
+  2.Once the ImageStream s2i-java6tomcat6maven3svn has been registered, you can create an template with:
   
+    ```
+    $ oc create -n openshift -f https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/s2i-java6tomcat6maven3svn-template.json
+    ```
+  
+  3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 'springboot-java' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
+  * APPLICATION_NAME: A *name* for your web application.
+  * APPLICATION_PATH(Optional): Specify the application build path, the tomcat webapps file name.
+  * APPLICATION_HOSTNAME(Optional): A hostname for route
+  * SVN_URI: The SVN repository URL containing your Java6 web application source code.
+  * SVN_USERNAME: Specify the subversion username.
+  * SVN_PASSWORD: Specify the subversion user's password.
+  
+  Next, click on 'Create' application.  This will invoke the *S2I process* which will build your application, containerize your application (as explained above), push the newly built image into the integrated docker registry and finally deploy a Pod containing your application.
+  
+  Congrats! You have now successfully created your own S2I builder image for building and deploying containerized Java Web applications on OpenShift.
