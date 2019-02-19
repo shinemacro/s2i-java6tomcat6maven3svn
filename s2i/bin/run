@@ -1,0 +1,11 @@
+#!/bin/bash -e
+#
+# S2I run script for the 's2i-Java6Tomcat6Maven3Svn' image.
+# The run script executes the server that runs your application.
+#
+# For more information see the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+#exec asdf -p 8080
+exec /opt/apache-tomcat-6.0.37/bin/catalina.sh run

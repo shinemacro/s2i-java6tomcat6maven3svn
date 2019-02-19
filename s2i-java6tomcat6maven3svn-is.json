@@ -1,0 +1,25 @@
+{
+   "kind": "ImageStream",
+   "apiVersion": "v1",
+   "metadata": {
+      "name": "s2i-java6tomcat6maven3svn"
+   },
+   "spec": {
+      "tags": [
+         {
+            "name": "latest",
+            "annotations": {
+               "description": "Java6 Tomcat6 Maven3 Svn S2I image",
+               "iconClass": "icon-jboss",
+               "tags": "builder,java,tomcat,maven,svn",
+               "supports": "java:6,maven:3,svn",
+               "version": "latest"
+            },
+            "from": {
+               "kind": "DockerImage",
+               "name": "docker.io/zhaoyaohong/s2i-java6tomcat6maven3svn:latest"
+            }
+         }
+      ]
+   }
+}

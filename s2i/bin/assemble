@@ -1,0 +1,54 @@
+#!/bin/bash -e
+#
+# S2I assemble script for the 's2i-Java6Tomcat6Maven3Svn' image.
+# The 'assemble' script builds your application source so that it is ready to run.
+#
+# For more information refer to the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+echo "---> assemble run start..."
+
+# If the 's2i-Java6Tomcat6Maven3Svn' assemble script is executed with the '-h' flag, print the usage.
+if [[ "$1" == "-h" ]]; then
+  exec /usr/libexec/s2i/usage
+fi
+
+# Restore artifacts from the previous build (if they exist).
+#
+if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+  echo "---> Restoring build artifacts"
+  mv /tmp/artifacts/. ./
+fi
+echo "---> Installing application source"
+WORK_DIR=/tmp/src;
+cd $WORK_DIR;
+if [ ! -z ${SVN_URI} ] ; then
+  echo "Fetching source from Subversion repository ${SVN_URI}"
+  svn co ${SVN_URI} --username=${SVN_USERNAME} --password=${SVN_PASSWORD} --no-auth-cache
+  export SRC_DIR=`basename $SVN_URI`
+  echo "Finished fetching source from Subversion repository ${SVN_URI}"
+  cd $WORK_DIR/$SRC_DIR/
+  # Copying maven settings.xml files from project.
+  if [ -f $WORK_DIR/$SRC_DIR/configuration/settings.xml ]; then
+    echo "Copying maven settings.xml files from project..."
+    mv $WORK_DIR/$SRC_DIR/configuration/settings.xml $HOME/.m2
+  fi
+  mvn package -Dmaven.test.skip=true;
+else
+  echo "SVN_URI not set, skip Subverion source download";
+fi
+
+echo "---> Tomcat deploy application start..."
+#find . -type f -name '*.war'|xargs -i cp {} /opt/apache-tomcat-6.0.37/webapps/
+#find /tmp/src/ -name '*.war'|xargs -i mv -v {} /opt/apache-tomcat-6.0.37/webapps/ROOT.war
+if [ ! -z ${APPLICATION_PATH} ] ; then
+  echo "APPLICATION_PATH is set, application package deployment is ${APPLICATION_PATH}.war.";
+  find /tmp/src/ -name '*.war'|xargs -i mv -v {} /opt/apache-tomcat-6.0.37/webapps/${APPLICATION_PATH}.war
+else
+  echo "APPLICATION_PATH not set, application package deployment is ROOT.war.";
+  find /tmp/src/ -name '*.war'|xargs -i mv -v {} /opt/apache-tomcat-6.0.37/webapps/ROOT.war
+fi
+echo "---> Tomcat deploy application end."
+
+# TODO: Add build steps for your application, eg npm install, bundle install, pip install, etc.
+echo "---> assemble run end."
