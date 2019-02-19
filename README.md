@@ -1,4 +1,4 @@
-s2i-java6tomcat6maven3svn: OpenShift S2I Builder for Java6 Docker images
+OpenShift S2I Builder for Java6 Web App Docker images
 ====
 Openshift s2i application template for JavaEE WAR deployment with Tomcat 6.
 
