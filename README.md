@@ -58,7 +58,7 @@ Test in Openshift
     $ oc create -n openshift -f https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/s2i-java6tomcat6maven3svn-template.json
     ```
   
-  3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 'springboot-java' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
+  3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 's2i-java6tomcat6maven3svn-removegit' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
   * APPLICATION_NAME: A *name* for your web application.
   * APPLICATION_PATH(Optional): Specify the application build path, the tomcat webapps file name.
   * APPLICATION_HOSTNAME(Optional): A hostname for route
