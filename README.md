@@ -49,13 +49,13 @@ Test in Openshift
   1.First load ImageStream:
 
     ```
-    $ oc create -n openshift -f https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/s2i-java6tomcat6maven3svn-is.json
+    $ oc create -n openshift -f https://raw.githubusercontent.com/shinemacro/s2i-java6tomcat6maven3svn/master/s2i-java6tomcat6maven3svn-is.json
     ```
   
   2.Once the ImageStream s2i-java6tomcat6maven3svn has been registered, you can create an template with:
   
     ```
-    $ oc create -n openshift -f https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/s2i-java6tomcat6maven3svn-template.json
+    $ oc create -n openshift -f https://raw.githubusercontent.com/shinemacro/s2i-java6tomcat6maven3svn/master/s2i-java6tomcat6maven3svn-template.json
     ```
   
   3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 's2i-java6tomcat6maven3svn-removegit' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
