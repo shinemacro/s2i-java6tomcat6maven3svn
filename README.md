@@ -5,7 +5,7 @@ Openshift s2i application template for JavaEE WAR deployment with Tomcat 6.
 Supported tags and respective `Dockerfile` links
 ---------
 
-- [`java6-maven-svn` (*Dockerfile*)](https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/Dockerfile)
+- [`s2i-java6tomcat6maven3svn` (*Dockerfile*)](https://github.com/shinemacro/s2i-java6tomcat6maven3svn/blob/master/Dockerfile)
 
 
 This repository contains the source for building various versions of
@@ -20,10 +20,10 @@ official [OpenShift Documentation](https://docs.openshift.org/latest/using_image
 Versions
 --------
 Java versions currently provided are:
-* JDK-1.6 + Tomcat 6.0.37 + Maven 3.2.5 + SVN
+* JDK 1.6 + Tomcat 6.0.37 + Maven 3.2.5 + SVN
 
 CentOS versions currently supported are:
-* CentOS7
+* CentOS 7
 
 Installation
 ------------
