@@ -1,4 +1,4 @@
-OpenShift S2I Builder for Java6 Web App Docker images
+OpenShift S2I Builder for Java6 Web App
 ====
 Openshift s2i application template for JavaEE WAR deployment with Tomcat 6.
 
