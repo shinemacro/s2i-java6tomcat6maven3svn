@@ -11,7 +11,7 @@
             "annotations": {
                "description": "Java6 Tomcat6 Maven3 Svn S2I image",
                "iconClass": "icon-jboss",
-               "tags": "builder,java,tomcat,maven,svn",
+               "tags": "java,tomcat,maven,svn",
                "supports": "java:6,maven:3,svn",
                "version": "latest"
             },
