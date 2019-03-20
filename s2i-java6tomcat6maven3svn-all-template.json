@@ -101,7 +101,7 @@
             "spec": {
                 "host": "${APPLICATION_HOSTNAME}",
                 "path": "/${APPLICATION_PATH}",
-                "targetPort": "8080-tcp"
+                "targetPort": "8080-tcp",
                 "to": {
                     "name": "${APPLICATION_NAME}"
                 }
