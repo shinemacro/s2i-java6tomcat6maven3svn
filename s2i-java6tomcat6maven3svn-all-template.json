@@ -158,7 +158,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}"
+                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
                     }
                 },
                 "triggers": [
@@ -200,7 +200,7 @@
                         "imageChangeParams": {
                             "automatic": true,
                             "containerNames": [
-                                "${APPLICATION_NAME}-${APPLICATION_VERSION}"
+                                "${APPLICATION_NAME}"
                             ],
                             "from": {
                                 "kind": "ImageStream",
@@ -225,8 +225,8 @@
                     "spec": {
                         "containers": [
                             {
-                                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
-                                "image": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
+                                "name": "${APPLICATION_NAME}",
+                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
