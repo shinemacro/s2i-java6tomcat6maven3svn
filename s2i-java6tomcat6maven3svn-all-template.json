@@ -110,7 +110,7 @@
             "kind": "ImageStream",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
@@ -120,7 +120,7 @@
             "kind": "BuildConfig",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
@@ -158,7 +158,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
+                        "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}"
                     }
                 },
                 "triggers": [
@@ -185,7 +185,7 @@
             "kind": "DeploymentConfig",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
@@ -200,33 +200,33 @@
                         "imageChangeParams": {
                             "automatic": true,
                             "containerNames": [
-                                "${APPLICATION_NAME}:${APPLICATION_VERSION}"
+                                "${APPLICATION_NAME}-${APPLICATION_VERSION}"
                             ],
                             "from": {
                                 "kind": "ImageStream",
-                                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
+                                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}"
                             }
                         }
                     }
                 ],
                 "replicas": 1,
                 "selector": {
-                    "deploymentConfig": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
+                    "deploymentConfig": "${APPLICATION_NAME}-${APPLICATION_VERSION}"
                 },
                 "template": {
                     "metadata": {
-                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                        "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
                         "labels": {
                             "svc": "${APPLICATION_NAME}",
-                            "deploymentConfig": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                            "deploymentConfig": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
                             "app": "${APPLICATION_NAME}"
                         }
                     },
                     "spec": {
                         "containers": [
                             {
-                                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
-                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
+                                "image": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
