@@ -111,7 +111,7 @@
             "kind": "ImageStream",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}",
+                "name": "${APPLICATION_NAME}",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
@@ -159,7 +159,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
+                        "name": "${APPLICATION_NAME}:latest"
                     }
                 },
                 "triggers": [
@@ -205,7 +205,7 @@
                             ],
                             "from": {
                                 "kind": "ImageStream",
-                                "name": "${APPLICATION_NAME}-${APPLICATION_VERSION}"
+                                "name": "${APPLICATION_NAME}"
                             }
                         }
                     }
@@ -227,7 +227,7 @@
                         "containers": [
                             {
                                 "name": "${APPLICATION_NAME}",
-                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                                "image": "${APPLICATION_NAME}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
