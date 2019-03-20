@@ -159,7 +159,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}"
+                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
                     }
                 },
                 "triggers": [
@@ -227,7 +227,7 @@
                         "containers": [
                             {
                                 "name": "${APPLICATION_NAME}",
-                                "image": "${APPLICATION_NAME}",
+                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
