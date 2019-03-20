@@ -6,24 +6,24 @@
             "iconClass" : "icon-tomcat",
             "description": "Application template for JavaEE WAR deployment with Tomcat 6."
         },
-        "name": "s2i-java6tomcat6maven3svn-removegit"
+        "name": "s2i-java6tomcat6maven3svn-all"
     },
     "labels": {
-        "template": "s2i-java6tomcat6maven3svn-removegit"
+        "template": "s2i-java6tomcat6maven3svn-all"
     },
     "parameters": [
-        {
-            "description": "Tomcat 6.0.37",
-            "name": "IMG_VERSION",
-            "displayName":"Image Version",
-            "value": "latest",
-            "required": true
-        },
         {
             "description": "The name for the application.",
             "name": "APPLICATION_NAME",
             "displayName":"Application Name",
             "value": "",
+            "required": true
+        },
+        {
+            "description": "The version for the application",
+            "name": "APPLICATION_VERSION",
+            "displayName":"Application Version",
+            "value": "latest",
             "required": true
         },
         {
@@ -67,18 +67,18 @@
             "spec": {
                 "ports": [
                     {
-                        "port": 8080,
+                        "port": 80,
                         "targetPort": 8080
                     }
                 ],
                 "selector": {
-                    "deploymentConfig": "${APPLICATION_NAME}"
+                    "svc": "${APPLICATION_NAME}"
                 }
             },
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "labels": {
-                    "application": "${APPLICATION_NAME}"
+                    "app": "${APPLICATION_NAME}"
                 },
                 "annotations": {
                     "description": "The web server's http port."
@@ -92,7 +92,7 @@
             "metadata": {
                 "name": "${APPLICATION_NAME}",
                 "labels": {
-                    "application": "${APPLICATION_NAME}"
+                    "app": "${APPLICATION_NAME}"
                 },
                 "annotations": {
                     "description": "Route for application's http service."
@@ -110,9 +110,9 @@
             "kind": "ImageStream",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}",
+                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                 "labels": {
-                    "application": "${APPLICATION_NAME}"
+                    "app": "${APPLICATION_NAME}"
                 }
             }
         },
@@ -120,9 +120,9 @@
             "kind": "BuildConfig",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}",
+                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                 "labels": {
-                    "application": "${APPLICATION_NAME}"
+                    "app": "${APPLICATION_NAME}"
                 }
             },
             "spec": {
@@ -158,7 +158,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}:latest"
+                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
                     }
                 },
                 "triggers": [
@@ -185,9 +185,9 @@
             "kind": "DeploymentConfig",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}",
+                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                 "labels": {
-                    "application": "${APPLICATION_NAME}"
+                    "app": "${APPLICATION_NAME}"
                 }
             },
             "spec": {
@@ -200,32 +200,33 @@
                         "imageChangeParams": {
                             "automatic": true,
                             "containerNames": [
-                                "${APPLICATION_NAME}"
+                                "${APPLICATION_NAME}:${APPLICATION_VERSION}"
                             ],
                             "from": {
                                 "kind": "ImageStream",
-                                "name": "${APPLICATION_NAME}"
+                                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
                             }
                         }
                     }
                 ],
                 "replicas": 1,
                 "selector": {
-                    "deploymentConfig": "${APPLICATION_NAME}"
+                    "deploymentConfig": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
                 },
                 "template": {
                     "metadata": {
-                        "name": "${APPLICATION_NAME}",
+                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                         "labels": {
-                            "deploymentConfig": "${APPLICATION_NAME}",
-                            "application": "${APPLICATION_NAME}"
+                            "svc": "${APPLICATION_NAME}",
+                            "deploymentConfig": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                            "app": "${APPLICATION_NAME}"
                         }
                     },
                     "spec": {
                         "containers": [
                             {
-                                "name": "${APPLICATION_NAME}",
-                                "image": "${APPLICATION_NAME}",
+                                "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
