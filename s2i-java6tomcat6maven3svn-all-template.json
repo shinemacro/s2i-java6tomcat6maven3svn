@@ -101,6 +101,7 @@
             "spec": {
                 "host": "${APPLICATION_HOSTNAME}",
                 "path": "/${APPLICATION_PATH}",
+                "targetPort": "8080-tcp"
                 "to": {
                     "name": "${APPLICATION_NAME}"
                 }
@@ -158,7 +159,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}:${APPLICATION_VERSION}"
+                        "name": "${APPLICATION_NAME}"
                     }
                 },
                 "triggers": [
@@ -226,7 +227,7 @@
                         "containers": [
                             {
                                 "name": "${APPLICATION_NAME}",
-                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                                "image": "${APPLICATION_NAME}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
