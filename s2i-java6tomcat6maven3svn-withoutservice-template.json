@@ -63,6 +63,13 @@
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
+            },
+            "status": {
+                "tags": [
+                    {
+                        "tag": "${APPLICATION_VERSION}"
+                    }
+                ]
             }
         },
         {
@@ -175,7 +182,7 @@
                         "containers": [
                             {
                                 "name": "${APPLICATION_NAME}",
-                                "image": "${APPLICATION_NAME}:${APPLICATION_VERSION}",
+                                "image": "${APPLICATION_NAME}",
                                 "imagePullPolicy": "Always",
                                 "readinessProbe": {
                                     "exec": {
