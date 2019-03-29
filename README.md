@@ -52,13 +52,18 @@ Test in Openshift
     $ oc create -n openshift -f https://raw.githubusercontent.com/shinemacro/s2i-java6tomcat6maven3svn/master/s2i-java6tomcat6maven3svn-is.json
     ```
   
-  2.Once the ImageStream s2i-java6tomcat6maven3svn has been registered, you can create an template with:
+  2.Once the ImageStream s2i-java6tomcat6maven3svn has been registered, you can create an template (include: route, service, is, bc, dc and pod) with:
   
     ```
-    $ oc create -n openshift -f https://raw.githubusercontent.com/shinemacro/s2i-java6tomcat6maven3svn/master/s2i-java6tomcat6maven3svn-template.json
+    $ oc create -n openshift -f https://raw.githubusercontent.com/shinemacro/s2i-java6tomcat6maven3svn/master/s2i-java6tomcat6maven3svn-all-template.json
+    ```
+  As also you can create an template (only include: bc, dc and pod) with:
+  
+    ```
+    $ oc create -n openshift -f https://raw.githubusercontent.com/shinemacro/s2i-java6tomcat6maven3svn/master/s2i-java6tomcat6maven3svn-withoutservice-template.json
     ```
   
-  3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 's2i-java6tomcat6maven3svn-removegit' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
+  3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 's2i-java6tomcat6maven3svn-all' or 's2i-java6tomcat6maven3svn-withoutserivce' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
   * APPLICATION_NAME: A *name* for your web application.
   * APPLICATION_PATH(Optional): Specify the application build path, the tomcat webapps file name.
   * APPLICATION_HOSTNAME(Optional): A hostname for route
