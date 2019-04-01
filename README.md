@@ -65,6 +65,7 @@ Test in Openshift
   
   3.Click on 'Add to Project' in OpenShift CP Web Console (UI) to create a new application and then select the 's2i-java6tomcat6maven3svn-all' or 's2i-java6tomcat6maven3svn-withoutserivce' template from the 'Browse' images tab.  You will then be presented with a form where you can specify 
   * APPLICATION_NAME: A *name* for your web application.
+  * APPLICATION_VERSION: A *version* for your web application, different version will create different bc, dc and pod.
   * APPLICATION_PATH(Optional): Specify the application build path, the tomcat webapps file name.
   * APPLICATION_HOSTNAME(Optional): A hostname for route
   * SVN_URI: The SVN repository URL containing your Java6 web application source code.
