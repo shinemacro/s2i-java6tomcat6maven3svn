@@ -28,9 +28,7 @@ CentOS versions currently supported are:
 Installation
 ------------
 
-To build a Java image:
-
-  To build a Java image with Maven, you need to run the build on a properly.
+  To build image:
 
     ```
     $ git clone https://github.com/shinemacro/s2i-java6tomcat6maven3svn.git
